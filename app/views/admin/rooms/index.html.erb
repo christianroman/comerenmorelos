@@ -1,36 +1,36 @@
 <div class="well">
-    <h2>Habitaciones</h2>
+  <h2>Habitaciones</h2>
 </div>
 
 <div class="button-wrapper">
-    <%= link_to "Nueva Habitación", new_admin_room_path, :class => 'btn btn-primary' %>
+  <%= link_to "Nueva Habitación", new_admin_room_path, :class => 'btn btn-primary' %>
 </div>
 
 <table class="table table-bordered table-hover">
-    <thead>
-	<tr>
-	    <th>Nombre</th>
-	    <th>Hotel</th>
-	    <th>Tarifa</th>
-	    <th>Existencia</th>
-	    <th>Disponibles</th>
-	    <th></th>
-	    <th></th>
-	</tr>
-    </thead>
-    <tbody>
-	<% for room in @rooms %>
-	    <tr>
-		<td><%= link_to room.name, admin_room_path(room) %></td>
-		<td><%= room.hotel.name %></td>
-		<td>$<%= room.fare %></td>
-		<td><%= room.existence %></td>
-		<td><%= room.available %></td>
-		<td><%= link_to "Editar", edit_admin_room_path(room), :class => 'btn btn-small' %></td>
-		<td><%= link_to "Eliminar", [:admin, room], :confirm => '¿Estas seguro?', :method => :delete, :class => 'btn btn-small btn-danger' %></td>
-	    </tr>
-	<% end %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Restaurant</th>
+      <th>Tarifa</th>
+      <th>Existencia</th>
+      <th>Disponibles</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for room in @rooms %>
+      <tr>
+        <td><%= link_to room.name, admin_room_path(room) %></td>
+        <td><%= room.restaurant.name %></td>
+        <td>$<%= room.fare %></td>
+        <td><%= room.existence %></td>
+        <td><%= room.available %></td>
+        <td><%= link_to "Editar", edit_admin_room_path(room), :class => 'btn btn-small' %></td>
+        <td><%= link_to "Eliminar", [:admin, room], :confirm => '¿Estas seguro?', :method => :delete, :class => 'btn btn-small btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

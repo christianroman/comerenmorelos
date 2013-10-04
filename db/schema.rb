@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131004163353) do
+ActiveRecord::Schema.define(:version => 20131004180519) do
 
   create_table "assets", :force => true do |t|
     t.datetime "created_at",        :null => false
@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
   end
 
   create_table "categorizations", :force => true do |t|
-    t.integer  "hotel_id"
+    t.integer  "restaurant_id"
     t.integer  "category_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "contacts", :force => true do |t|
@@ -52,9 +52,9 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
     t.text     "comment"
     t.integer  "adults"
     t.integer  "children"
-    t.integer  "hotel_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "destinations", :force => true do |t|
@@ -75,16 +75,9 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "hotel_id"
-  end
-
-  create_table "hotels_promos", :force => true do |t|
-    t.integer  "promo_id"
-    t.integer  "hotel_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "restaurant_id"
   end
 
   create_table "pages", :force => true do |t|
@@ -104,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
   end
 
   create_table "photos", :force => true do |t|
-    t.integer  "hotel_id"
+    t.integer  "restaurant_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "data_file_name"
@@ -125,12 +118,12 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
     t.date     "check_in"
     t.date     "check_out"
     t.integer  "status"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.text     "comment"
     t.integer  "adults"
-    t.integer  "hotel_id"
-    t.decimal  "total_amount", :precision => 10, :scale => 0
+    t.integer  "restaurant_id"
+    t.decimal  "total_amount",  :precision => 10, :scale => 0
     t.datetime "purchased_at"
     t.integer  "children"
   end
@@ -154,6 +147,13 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
     t.string   "slug"
   end
 
+  create_table "restaurants_promos", :force => true do |t|
+    t.integer  "promo_id"
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -175,13 +175,13 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
   end
 
   create_table "rooms", :force => true do |t|
-    t.integer  "hotel_id"
+    t.integer  "restaurant_id"
     t.string   "name"
-    t.decimal  "fare",       :precision => 10, :scale => 0
+    t.decimal  "fare",          :precision => 10, :scale => 0
     t.integer  "existence"
     t.integer  "available"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   create_table "settings", :force => true do |t|
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20131004163353) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "hotel_id"
+    t.integer  "restaurant_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

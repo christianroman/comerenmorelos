@@ -6,7 +6,7 @@ module Admin
     def index
 
       unless @current_restaurant.nil?
-        #@contacts = @current_hotel.contacts
+        #@contacts = @current_restaurant.contacts
         @contacts = Contact.where(restaurant_id: @current_restaurant.id)
       else
         @contacts = Contact.all

@@ -1,16 +1,16 @@
 <script type="text/javascript">
 $(function() {
-	$( "#hotel-embed-widget #check_in" ).datepicker({
+	$( "#restaurant-embed-widget #check_in" ).datepicker({
 	    changeMonth: true,
 	    minDate: 0,
 	    dateFormat: 'dd/mm/yy',
 	    onClose: function( selectedDate ) {
 		var date2 = $(this).datepicker('getDate'); 
   		date2.setDate(date2.getDate()+1); 
-		$( "#hotel-embed-widget #check_out" ).datepicker( "option", "minDate", date2 );
+		$( "#restaurant-embed-widget #check_out" ).datepicker( "option", "minDate", date2 );
 	    }
 	});
-	$( "#hotel-embed-widget #check_out" ).datepicker({
+	$( "#restaurant-embed-widget #check_out" ).datepicker({
 	    changeMonth: true,
 	    dateFormat: 'dd/mm/yy'
 	});
@@ -18,7 +18,7 @@ $(function() {
 </script>
 
 <style type="text/css">
-    #hotel-embed-widget {
+    #restaurant-embed-widget {
 	width: 250px;
 	height:450px;
 	overflow:auto;
@@ -28,22 +28,22 @@ $(function() {
 	background-color:white;
 	color: #333;
     }  
-    #hotel-embed-widget h2 {
+    #restaurant-embed-widget h2 {
 	font-size: 16px;
 	color: #000;
 	text-align:center;
 	margin: 4px auto;
     }
-    #hotel-embed-widget h3 em {
+    #restaurant-embed-widget h3 em {
 	font-size: 14px;
 	text-style: italic;
 	color: #333;
     }
 </style>
 
-<div id="hotel-embed-widget">
+<div id="restaurant-embed-widget">
 
-    <%= form_tag("#{root_url}hoteles/#{@hotel.id}/reservar", :method => 'post', :name => 'reservation_form', :class => 'form-horizontal') do %>
+    <%= form_tag("#{root_url}restaurantes/#{@restaurant.id}/reservar", :method => 'post', :name => 'reservation_form', :class => 'form-horizontal') do %>
 	<div class="control-group">
 	    <%= label_tag 'nombre', 'Nombre', :class => 'control-label' %>
 	    <div class="controls">
@@ -81,7 +81,7 @@ $(function() {
 	<div class="control-group">
 	    <%= label_tag 'room', 'Habitación', :class => 'control-label' %>
 	    <div class="controls">
-		<%= collection_select(:room, :room_id, @hotel.rooms, :id, :name_and_fare, {:prompt => 'Seleccionar Habitación'}, {:class => 'select_form'}) %>
+		<%= collection_select(:room, :room_id, @restaurant.rooms, :id, :name_and_fare, {:prompt => 'Seleccionar Habitación'}, {:class => 'select_form'}) %>
 	    </div>
 	</div>
 	<div class="control-group">

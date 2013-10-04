@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tu Hotel en Morelos</title>
-  <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-  <%= yield(:head) %>
-</head>
-<body>
+  <head>
+    <title>Tu Restaurant en Morelos</title>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body>
 
     <div class="wrapper">
 
-	<div class="header">
-	    <%= link_to '', root_url( :subdomain => false ), :class => 'logo' %>
-	    
-	    <% if controller_name == 'home' && action_name == 'index' %>
-		<div class="pasos"></div>
-	    <% end %>
+      <div class="header">
+        <%= link_to '', root_url( :subdomain => false ), :class => 'logo' %>
 
-	</div>
+        <% if controller_name == 'home' && action_name == 'index' %>
+          <div class="pasos"></div>
+        <% end %>
 
-	<div class="main">
-	    <div class="content <%= controller_name == 'home' && action_name == 'index' ? 'content-index' : '' %>">
-		<%= yield %>
-	    </div>
-	</div>
+      </div>
 
-	<div class="footer">
-	    <!--<div class="wrapper_width">-->
-		<%= render :file => 'layouts/footer' %>
-	</div>
+      <div class="main">
+        <div class="content <%= controller_name == 'home' && action_name == 'index' ? 'content-index' : '' %>">
+          <%= yield %>
+        </div>
+      </div>
 
-	<div class="subfooter">&nbsp;</div>
+      <div class="footer">
+        <!--<div class="wrapper_width">-->
+          <%= render :file => 'layouts/footer' %>
+        </div>
 
-	<% unless background_images.empty? %>
-	<div class="background-images" style="display:none;">
-	    <% background_images.each do |bg| %>
-		<span data-url="<%= bg.data.url(:original) %>"></span>
-	    <% end %>
-	</div>
-	<% end %>
+        <div class="subfooter">&nbsp;</div>
 
-    </div>
+        <% unless background_images.empty? %>
+          <div class="background-images" style="display:none;">
+            <% background_images.each do |bg| %>
+              <span data-url="<%= bg.data.url(:original) %>"></span>
+            <% end %>
+          </div>
+        <% end %>
 
-</body>
-</html>
+      </div>
+
+    </body>
+  </html>

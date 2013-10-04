@@ -1,29 +1,29 @@
-class HotelsController < ApplicationController
+class RestaurantsController < ApplicationController
 
   def index
-    @hotel = @current_hotel
+    @restaurant = @current_restaurant
   end
 
   def show
 
-    #@hotel = Hotel.find(params[:id])
-    #@hotel = Hotel.find_by_slug!(request.subdomain)
+    #@restaurant = Restaurant.find(params[:id])
+    #@restaurant = Restaurant.find_by_slug!(request.subdomain)
     respond_to do |format|
       format.html {
 
-        @hotel = Hotel.find_by_slug!(request.subdomain)
+        @restaurant = Restaurant.find_by_slug!(request.subdomain)
 
         @dates = Array.new
-        @hotel.availabilities.each do |range|
+        @restaurant.availabilities.each do |range|
           @dates |= (range.start_date..range.end_date).map{ |date| date.strftime('%d/%m/%Y') }
         end		
 
       }
       format.js {
 
-        @hotel = Hotel.find(params[:id])
+        @restaurant = Restaurant.find(params[:id])
         @dates = Array.new
-        @hotel.availabilities.each do |range|
+        @restaurant.availabilities.each do |range|
           @dates |= (range.start_date..range.end_date).map{ |date| date.strftime('%d/%m/%Y') }
         end
 
@@ -33,7 +33,7 @@ class HotelsController < ApplicationController
 
   def create
 
-    @guest = Guest.new(name: params[:nombre], email: params[:email], phone: params[:telefono], hotel_id: params[:id])
+    @guest = Guest.new(name: params[:nombre], email: params[:email], phone: params[:telefono], restaurant_id: params[:id])
 
     respond_to do |format|
 
@@ -50,19 +50,19 @@ class HotelsController < ApplicationController
 
               total_amount = days * Room.find(params[:room][:room_id]).fare
 
-              @reservation = Reservation.new(room_id: params[:room][:room_id], guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], hotel_id: params[:id], status:0, total_amount:total_amount)
+              @reservation = Reservation.new(room_id: params[:room][:room_id], guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], restaurant_id: params[:id], status:0, total_amount:total_amount)
 
               if @reservation.valid?
                 if @reservation.save
 
                   if Rails.env.production?
-                    ActionMailer::Base.mail(:from => "tuhotelenmorelos@gmail.com", :to => Hotel.find(params[:id]).email, :subject => "Nueva reservacion", :body => "Se ha realizado una nueva reservacion a traves del portal. Favor de revisar").deliver
+                    ActionMailer::Base.mail(:from => "turestaurantenmorelos@gmail.com", :to => Restaurant.find(params[:id]).email, :subject => "Nueva reservacion", :body => "Se ha realizado una nueva reservacion a traves del portal. Favor de revisar").deliver
                   end
 
                   return_url = root_url
 
                   values = {
-                    :business => @reservation.hotel.paypal,
+                    :business => @reservation.restaurant.paypal,
                     :cmd => '_xclick',
                     :upload => 1,
                     :currency_code => 'MXN',
@@ -70,8 +70,8 @@ class HotelsController < ApplicationController
                     :invoice => @reservation.id,
                     :notify_url => payment_notifications_url,
                     :amount => @reservation.total_amount,
-                    :item_name => "#{days} noches en #{@reservation.hotel.name}".encode,
-                    :item_number => @reservation.hotel.id,
+                    :item_name => "#{days} noches en #{@reservation.restaurant.name}".encode,
+                    :item_number => @reservation.restaurant.id,
                     :quantity => 1
                   }
 
@@ -100,14 +100,14 @@ class HotelsController < ApplicationController
 
               unless params[:room][:room_id].empty?
 
-                @contact = Contact.new(room_id: params[:room][:room_id], guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], hotel_id: params[:id])
+                @contact = Contact.new(room_id: params[:room][:room_id], guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], restaurant_id: params[:id])
 
                 if @contact.valid?
 
                   if @contact.save
 
                     if Rails.env.production?
-                      ActionMailer::Base.mail(:from => "tuhotelenmorelos@gmail.com", :to => Hotel.find(params[:id]).email, :subject => "Nueva solicitud de informacion", :body => "Se ha realizado una nueva solicitud de informacion a traves del portal. Favor de revisar").deliver
+                      ActionMailer::Base.mail(:from => "comerenmorelos@gmail.com", :to => Restaurant.find(params[:id]).email, :subject => "Nueva solicitud de informacion", :body => "Se ha realizado una nueva solicitud de informacion a traves del portal. Favor de revisar").deliver
                     end
 
                     format.json { render :json => {:success => true} }
@@ -132,7 +132,7 @@ class HotelsController < ApplicationController
 
             else
 
-              @contact = Contact.new(room_id: nil, guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], hotel_id: params[:id])
+              @contact = Contact.new(room_id: nil, guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], restaurant_id: params[:id])
 
               if @contact.valid?
 

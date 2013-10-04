@@ -1,25 +1,25 @@
 <%= form_for(@fare) do |f| %>
 
-    <%= render 'admin/errors', object: @fare %>
+  <%= render 'admin/errors', object: @fare %>
 
-    <div class="field">
-	<%= f.label :id %><br />
-	<%= f.number_field :id %>
-    </div>
-    <div class="field">
-	<%= f.label :name %><br />
-	<%= f.text_field :name %>
-    </div>
-    <div class="field">
-	<%= f.label :start %><br />
-	<%= f.number_field :start %>
-    </div>
-    <div class="field">
-	<%= f.label :end %><br />
-	<%= f.number_field :end %>
-    </div>
-    <div class="actions">
-	<%= f.submit %>
-    </div>
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br />
+    <%= f.number_field :start %>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br />
+    <%= f.number_field :end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 
 <% end %>

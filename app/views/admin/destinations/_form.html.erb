@@ -1,15 +1,15 @@
 <%= form_for [:admin, @destination] do |f| %>
 
-    <%= render 'admin/errors', object: @destination %>
+  <%= render 'admin/errors', object: @destination %>
 
-    <table class="table table-bordered">
+  <table class="table table-bordered">
 
-	<tr>
-	    <td><%= f.label :name, 'Nombre' %></td>
-	    <td><%= f.text_field :name, :class => 'input-xlarge' %></td>
-	</tr>
-    </table>
+    <tr>
+      <td><%= f.label :name, 'Nombre' %></td>
+      <td><%= f.text_field :name, :class => 'input-xlarge' %></td>
+    </tr>
+  </table>
 
-    <%= f.submit :class => 'btn btn-primary' %>
+  <%= f.submit :class => 'btn btn-primary' %>
 
 <% end %>

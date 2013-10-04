@@ -2,108 +2,108 @@
 
 <%= form_tag('/search', :method => 'get', :name => 'search_form') do %>
 
-    <div class="boxes">
+  <div class="boxes">
 
-	<div class="box1">
+    <div class="box1">
 
-	    <span class="box_title">DESTINO O ZONA</span>
+      <span class="box_title">DESTINO O ZONA</span>
 
-	    <table class="">
-		<% @destinations.each_with_index do |destination,i| %>
+      <table class="">
+        <% @destinations.each_with_index do |destination,i| %>
 
-			<% if i % 2 == 0 %>
-			    <tr>
-			<% end %>
-			
-			<td>
-			    <label><%= check_box_tag "destinations[]", destination.id %> <%= destination.name %></label>
-			</td>
+          <% if i % 2 == 0 %>
+            <tr>
+            <% end %>
 
-			<% if i % 2 != 0 %>
-			    </tr>
-			<% end %>
+            <td>
+              <label><%= check_box_tag "destinations[]", destination.id %> <%= destination.name %></label>
+            </td>
 
-		<% end %>
+            <% if i % 2 != 0 %>
+            </tr>
+          <% end %>
 
-		<td>
-		    <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
-		</td>
+        <% end %>
 
-		<%= '</tr>'.html_safe %>
+        <td>
+          <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
+        </td>
 
-	    </table>
+        <%= '</tr>'.html_safe %>
 
-	</div>
+    </table>
 
-	<div class="box2">
+  </div>
 
-	    <span class="box_title">RANGO DE TARIFAS</span>
+  <div class="box2">
 
-	    <table>
-		<% @fares.each_with_index do |fare, i| %>
+    <span class="box_title">RANGO DE TARIFAS</span>
 
-		    <% if i % 2 == 0 %>
-		        <tr>
-		    <% end %>
-			
-		    <td>
-		        <label><%= check_box_tag "fares[]", fare.id %> <%= fare.name %></label>
-		    </td>
-		    
-		    <% if i % 2 != 0 %>
-			</tr>
-		    <% end %>
+    <table>
+      <% @fares.each_with_index do |fare, i| %>
 
-		<% end %>
+        <% if i % 2 == 0 %>
+          <tr>
+          <% end %>
 
-		<td>
-		    <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
-		</td>
+          <td>
+            <label><%= check_box_tag "fares[]", fare.id %> <%= fare.name %></label>
+          </td>
 
-		<%= '</tr>'.html_safe %>		
+          <% if i % 2 != 0 %>
+          </tr>
+        <% end %>
 
-	    </table>
+      <% end %>
 
-	</div>
+      <td>
+        <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
+      </td>
 
-	<div class="box3">
+      <%= '</tr>'.html_safe %>		
 
-	    <span class="box_title">SEGMENTO O VOCACIÓN</span>
+  </table>
 
-	    <table>
+</div>
 
-		<% @categories.each_with_index do |category, i| %>
+<div class="box3">
 
-		    <% if i % 2 == 0 %>
-			<tr>
-		    <% end %>
-			
-		    <td>
-		        <label><%= check_box_tag "categories[]", category.id %> <%= category.name %></label>
-		    </td>
+  <span class="box_title">SEGMENTO O VOCACIÓN</span>
 
-		    <% if i % 2 != 0 %>
-		        </tr>
-		    <% end %>
+  <table>
 
-		<% end %>
+    <% @categories.each_with_index do |category, i| %>
 
-		<td>
-		    <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
-		</td>
+      <% if i % 2 == 0 %>
+        <tr>
+        <% end %>
 
-		<%= '</tr>'.html_safe %>		
+        <td>
+          <label><%= check_box_tag "categories[]", category.id %> <%= category.name %></label>
+        </td>
 
-	    </table>
+        <% if i % 2 != 0 %>
+        </tr>
+      <% end %>
 
-	</div>
-
-	<div class="clearfix"></div>
-
-    </div>
-
-    <%= button_tag(type: 'submit', class: 'btn btn-large btn-custom') do %>
-	BUSCAR UN HOTEL
     <% end %>
+
+    <td>
+      <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
+    </td>
+
+    <%= '</tr>'.html_safe %>		
+
+</table>
+
+  </div>
+
+  <div class="clearfix"></div>
+
+</div>
+
+<%= button_tag(type: 'submit', class: 'btn btn-large btn-custom') do %>
+  BUSCAR UN HOTEL
+<% end %>
 
 <% end %>

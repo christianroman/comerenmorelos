@@ -1,58 +1,58 @@
 <%= form_for [:admin, @room] do |f| %>
 
-    <%= render 'admin/errors', object: @room %>
+  <%= render 'admin/errors', object: @room %>
 
-    <table class="table table-bordered">
-	<tr>
-	    <td>
-		<%= f.label :hotel_id, 'Hotel' %>
-	    </td>
-	    <td>
-		<%= collection_select :room, :hotel_id, @current_hotel.nil? ? Hotel.all : Array(current_admin_user.hotel), :id, :name, {}, {:class => 'input-select'} %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :name, 'Nombre' %>
-	    </td>
-	    <td>
-		<%= f.text_field :name, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :fare, 'Tarifa' %>
-	    </td>
-	    <td>
-		<%= f.text_field :fare, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :existence, 'Existencia' %>
-	    </td>
-	    <td>
-		<%= f.number_field :existence, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :available, 'Disponibles' %>
-	    </td>
-	    <td>
-		<%= f.number_field :available, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-    </table>
+  <table class="table table-bordered">
+    <tr>
+      <td>
+        <%= f.label :restaurant_id, 'Restaurant' %>
+      </td>
+      <td>
+        <%= collection_select :room, :restaurant_id, @current_restaurant.nil? ? Restaurant.all : Array(current_admin_user.restaurant), :id, :name, {}, {:class => 'input-select'} %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :name, 'Nombre' %>
+      </td>
+      <td>
+        <%= f.text_field :name, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :fare, 'Tarifa' %>
+      </td>
+      <td>
+        <%= f.text_field :fare, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :existence, 'Existencia' %>
+      </td>
+      <td>
+        <%= f.number_field :existence, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :available, 'Disponibles' %>
+      </td>
+      <td>
+        <%= f.number_field :available, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+  </table>
 
-     <%= f.fields_for :room_fares do |builder| %>
-	 <%= render 'room_fare_fields', f: builder %>
-     <% end %>
+  <%= f.fields_for :room_fares do |builder| %>
+    <%= render 'room_fare_fields', f: builder %>
+  <% end %>
 
-    <%= link_to_add_fields "Agregar tarifa especial", f, :room_fares %>
+  <%= link_to_add_fields "Agregar tarifa especial", f, :room_fares %>
 
-    <br /><br />
+  <br /><br />
 
-    <%= f.submit :class => 'btn btn-primary' %>
+  <%= f.submit :class => 'btn btn-primary' %>
 
 <% end %>

@@ -1,32 +1,32 @@
 <div class="well">
-    <h2>Usuarios</h2>
+  <h2>Usuarios</h2>
 </div>
 
 <div class="button-wrapper">
-    <%= link_to 'Nuevo usuario', new_admin_user_path, :class => 'btn btn-primary' %>
+  <%= link_to 'Nuevo usuario', new_admin_user_path, :class => 'btn btn-primary' %>
 </div>
 
 <table class="table table-bordered table-hover">
-    <thead>
-	<tr>
-	    <th>E-mail</th>
-	    <th>Hotel</th>
-	    <th>Rol</th>
-	    <th></th>
-	    <th></th>
-	</tr>
-    </thead>
-    <tbody>
-	<% @users.each do |user| %>
-	    <tr>
-		<td><%= link_to user.email, admin_user_path(user) %></td>
-		<td><%= user.hotel.nil? ? 'No disponible' : user.hotel.name %></td>
-		<td><%= user.roles.map{ |r| r.name }.join(',') %></td>
-		<td><%= link_to 'Editar', edit_admin_user_path(user), :class => 'btn btn-small' %></td>
-		<td><%= link_to 'Eliminar', [:admin, user], method: :delete, data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-small btn-danger' %></td>
-	    </tr>
-	<% end %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>E-mail</th>
+      <th>Restaurant</th>
+      <th>Rol</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.email, admin_user_path(user) %></td>
+        <td><%= user.restaurant.nil? ? 'No disponible' : user.restaurant.name %></td>
+        <td><%= user.roles.map{ |r| r.name }.join(',') %></td>
+        <td><%= link_to 'Editar', edit_admin_user_path(user), :class => 'btn btn-small' %></td>
+        <td><%= link_to 'Eliminar', [:admin, user], method: :delete, data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-small btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

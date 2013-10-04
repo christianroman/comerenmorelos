@@ -10,28 +10,28 @@ $(function() {
     d.setDate(d.getDate()-1);
 
     $('.datepicker-checkin').datepicker({
-	startDate: d,
-	format: 'dd/mm/yyyy',
-	autoclose: true,
-	language: 'es',
-	beforeShowDay: function(date){
-	    var string = dateToString(date);
-	    return datesCheckIn.indexOf(string) == -1;
-	}
+        startDate: d,
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        language: 'es',
+        beforeShowDay: function(date){
+            var string = dateToString(date);
+            return datesCheckIn.indexOf(string) == -1;
+        }
     }).on('changeDate', function(e){
-	var d2 = new Date();
-	d2.setDate(e.date.getDate()+1);
-	$('.datepicker-checkout').datepicker('update', d2).datepicker('setStartDate', e.date);
+        var d2 = new Date();
+        d2.setDate(e.date.getDate()+1);
+        $('.datepicker-checkout').datepicker('update', d2).datepicker('setStartDate', e.date);
     })
 
     $('.datepicker-checkout').datepicker({
-	format: 'dd/mm/yyyy',
-	autoclose: true,
-	language: 'es',
-	beforeShowDay: function(date){
-	    var string = dateToString(date);
-	    return datesCheckOut.indexOf(string) == -1;
-	}
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        language: 'es',
+        beforeShowDay: function(date){
+            var string = dateToString(date);
+            return datesCheckOut.indexOf(string) == -1;
+        }
     });
 
     /* Slider */
@@ -79,20 +79,20 @@ $(function() {
        */
 
     $(document).on("ajax:success", "form[data-update-target]", function(evt, data){
-	if (data.location) {
-	    window.location.href = data.location;
-	} else if (data.success) {
-	    $('#status_alert').hide();
-	    $('#status_success').hide();
-	    $('#status_success').fadeIn();
-	} else {
-	    if (data){
-		for (var i = 0; i < data.length; i++) 
-		    $('#status_alert ul').append('<li>' + data[i] + '</li>');
-		$('#status_success').hide();
-		$('#status_alert').fadeIn();
-	    }
-	}
+        if (data.location) {
+            window.location.href = data.location;
+        } else if (data.success) {
+            $('#status_alert').hide();
+            $('#status_success').hide();
+            $('#status_success').fadeIn();
+        } else {
+            if (data){
+                for (var i = 0; i < data.length; i++) 
+        $('#status_alert ul').append('<li>' + data[i] + '</li>');
+    $('#status_success').hide();
+    $('#status_alert').fadeIn();
+            }
+        }
     }); 
 
 });

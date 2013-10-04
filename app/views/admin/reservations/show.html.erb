@@ -1,77 +1,77 @@
 <div class="button-wrapper">
-    <%= link_to 'Regresar', admin_reservations_path, :class => 'btn' %>
-    <%= link_to 'Editar', edit_admin_reservation_path(@reservation), :class => 'btn' %>
+  <%= link_to 'Regresar', admin_reservations_path, :class => 'btn' %>
+  <%= link_to 'Editar', edit_admin_reservation_path(@reservation), :class => 'btn' %>
 </div>
 
 <table class="table table-bordered table-striped">
 
-    <tr>
-	<td width="121">&nbsp;</td>
-	<td>
-	    <h2>Reservación No. <%= @reservation.id %></h2>
-	</td>
-    </tr>
+  <tr>
+    <td width="121">&nbsp;</td>
+    <td>
+      <h2>Reservación No. <%= @reservation.id %></h2>
+    </td>
+  </tr>
 
-    <tr>
-	<td><b>Reservacion creada</b></td>
-	<td><%= @reservation.created_at.strftime("%d/%m/%Y %I:%M%p") %></td>
-    </tr>
-    <tr>
-	<td><b>Reservacion actualizada</b></td>
-	<td><%= @reservation.updated_at.strftime("%d/%m/%Y %I:%M%p") %></td>
-    </tr>
+  <tr>
+    <td><b>Reservacion creada</b></td>
+    <td><%= @reservation.created_at.strftime("%d/%m/%Y %I:%M%p") %></td>
+  </tr>
+  <tr>
+    <td><b>Reservacion actualizada</b></td>
+    <td><%= @reservation.updated_at.strftime("%d/%m/%Y %I:%M%p") %></td>
+  </tr>
 
-    <tr>
-	<td><b>Hotel</b></td>
-	<td><%= link_to @reservation.hotel.name, admin_hotels_path(@reservation.hotel) %></td>
-    </tr>
+  <tr>
+    <td><b>Restaurant</b></td>
+    <td><%= link_to @reservation.restaurant.name, admin_restaurants_path(@reservation.restaurant) %></td>
+  </tr>
 
-    <tr>
-	<td><b>Habitación</b></td>
-	<td><%= link_to "#{@reservation.room.name} ($#{@reservation.room.fare})", admin_rooms_path(@reservation.room) %></td>
-    </tr>
-    <tr>
-	<td><b>Cliente</b></td>
-	<td><%= link_to @reservation.guest.name, admin_guest_path(@reservation.guest) %></td>
-    </tr>
-    <tr>
-	<td><b>Check-in</b></td>
-	<td><%= @reservation.check_in %></td>
-    </tr>
-    <tr>
-	<td><b>Check-out</b></td>
-	<td><%= @reservation.check_out %></td>
-    </tr>
-    <tr>
-	<td><b>Adultos</b></td>
-	<td><%= @reservation.adults %></td>
-    </tr>
-    <tr>
-	<td><b>Niños</b></td>
-	<td><%= @reservation.children %></td>
-    </tr>
-    <tr>
-	<td><b>Comentario</b></td>
-	<td><%= @reservation.comment %></td>
-    </tr>
-    <tr>
-	<td><b>Total</b></td>
-	<td>$<%= @reservation.total_amount.nil? ? '0' : @reservation.total_amount %></td>
-    </tr>
-    <tr>
-	<td><b>Estado</b></td>
-	<td><span class="label label-info"><%= @reservation.status_human %></span></td>
-    </tr>
-    <tr>
-	<td><b>Paypal Transaction ID</b></td>
-	<td><%= @reservation.payment_notification.nil? ? 'No disponible' : @reservation.payment_notification.transaction_id %></td>
-    </tr>
-    <tr>
-	<td><b>Paypal Status</b></td>
-	<td><%= @reservation.payment_notification.nil? ? 'No disponible' : @reservation.payment_notification.status %></td>
-    </tr>
-    <tr>
-	<td><b>Paypal fecha pago</b></td>
-	<td><%= @reservation.payment_notification.nil? ? 'No disponible' : @reservation.payment_notification.created_at.strftime('%d/%m/%Y %I:%M%p') %></td>
-    </tr>
+  <tr>
+    <td><b>Habitación</b></td>
+    <td><%= link_to "#{@reservation.room.name} ($#{@reservation.room.fare})", admin_rooms_path(@reservation.room) %></td>
+  </tr>
+  <tr>
+    <td><b>Cliente</b></td>
+    <td><%= link_to @reservation.guest.name, admin_guest_path(@reservation.guest) %></td>
+  </tr>
+  <tr>
+    <td><b>Check-in</b></td>
+    <td><%= @reservation.check_in %></td>
+  </tr>
+  <tr>
+    <td><b>Check-out</b></td>
+    <td><%= @reservation.check_out %></td>
+  </tr>
+  <tr>
+    <td><b>Adultos</b></td>
+    <td><%= @reservation.adults %></td>
+  </tr>
+  <tr>
+    <td><b>Niños</b></td>
+    <td><%= @reservation.children %></td>
+  </tr>
+  <tr>
+    <td><b>Comentario</b></td>
+    <td><%= @reservation.comment %></td>
+  </tr>
+  <tr>
+    <td><b>Total</b></td>
+    <td>$<%= @reservation.total_amount.nil? ? '0' : @reservation.total_amount %></td>
+  </tr>
+  <tr>
+    <td><b>Estado</b></td>
+    <td><span class="label label-info"><%= @reservation.status_human %></span></td>
+  </tr>
+  <tr>
+    <td><b>Paypal Transaction ID</b></td>
+    <td><%= @reservation.payment_notification.nil? ? 'No disponible' : @reservation.payment_notification.transaction_id %></td>
+  </tr>
+  <tr>
+    <td><b>Paypal Status</b></td>
+    <td><%= @reservation.payment_notification.nil? ? 'No disponible' : @reservation.payment_notification.status %></td>
+  </tr>
+  <tr>
+    <td><b>Paypal fecha pago</b></td>
+    <td><%= @reservation.payment_notification.nil? ? 'No disponible' : @reservation.payment_notification.created_at.strftime('%d/%m/%Y %I:%M%p') %></td>
+  </tr>
 </table>

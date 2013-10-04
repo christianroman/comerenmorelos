@@ -1,45 +1,45 @@
 <div class="button-wrapper">
-    <%= link_to "Regresar", admin_rooms_path, :class => 'btn' %>
-    <%= link_to "Editar", edit_admin_room_path(@room), :class => 'btn' %>
+  <%= link_to "Regresar", admin_rooms_path, :class => 'btn' %>
+  <%= link_to "Editar", edit_admin_room_path(@room), :class => 'btn' %>
 </div>
 
 <table class="table table-bordered table-striped">
-    <tr>
-	<td width="121">&nbsp;</td>
-	<td>
-	    <h2><%= @room.hotel.name %></h2>
-	</td>
-    </tr>
-    <tr>
-	<td><b>Nombre</b></td>
-	<td><%= @room.name %></td>
-    </tr>
-    <tr>
-	<td><b>Tarifa</b></td>
-	<td>$<%= @room.fare %></td>
-    </tr>
-    <tr>
-	<td><b>Existencias</b></td>
-	<td><%= @room.existence %></td>
-    </tr>
-    <tr>
-	<td><b>Disponibles</b></td>
-	<td><%= @room.available %></td>
-    </tr>
-    <tr>
-	<td><b>Tarifas especiales</b></td>
-	<td>
-	    <% if @room.room_fares.empty? %>
-		Ninguna
-	    <% else %>
-		<% @room.room_fares.each do |room_fare| %>
-		    <ul>
-			<li>
-			<%= "<b>$#{room_fare.fare}</b> de <span class=\"label label-success\">#{room_fare.start_date}</span> a <span class=\"label label-important\">#{room_fare.end_date}</span>".html_safe %>
-			</li>
-		    </ul>
-		<% end %>
-	    <% end %>
-	</td>
-    </tr>
+  <tr>
+    <td width="121">&nbsp;</td>
+    <td>
+      <h2><%= @room.restaurant.name %></h2>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Nombre</b></td>
+    <td><%= @room.name %></td>
+  </tr>
+  <tr>
+    <td><b>Tarifa</b></td>
+    <td>$<%= @room.fare %></td>
+  </tr>
+  <tr>
+    <td><b>Existencias</b></td>
+    <td><%= @room.existence %></td>
+  </tr>
+  <tr>
+    <td><b>Disponibles</b></td>
+    <td><%= @room.available %></td>
+  </tr>
+  <tr>
+    <td><b>Tarifas especiales</b></td>
+    <td>
+      <% if @room.room_fares.empty? %>
+        Ninguna
+      <% else %>
+        <% @room.room_fares.each do |room_fare| %>
+          <ul>
+            <li>
+            <%= "<b>$#{room_fare.fare}</b> de <span class=\"label label-success\">#{room_fare.start_date}</span> a <span class=\"label label-important\">#{room_fare.end_date}</span>".html_safe %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
 </table>

@@ -2,28 +2,28 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-      user ||= User.new
+    user ||= User.new
 
-      if user.role? :super_admin
-	  can :manage, :all
-      elsif user.role? :hotel_admin
-	  #can :manage, [Hotel, Room, Guest, Reservation]
-	  can :manage, Hotel, :id => user.hotel_id
-	  can :manage, Room, :hotel_id => user.hotel_id
-	  can :manage, Guest
-	  can :manage, Reservation, :hotel_id => user.hotel_id
-	  can :manage, Contact, :hotel_id => user.hotel_id
-	  can :manage, Availability, :hotel_id => user.hotel_id
-	  can :update, User, :id => user.id
-      elsif user.role? :hotel_staff
-	  #can :read, [Hotel, Room, Guest, Reservation]
-	  can :read, Hotel, :id => user.hotel_id
-	  can :read, Room, :hotel_id => user.hotel_id
-	  can :read, Guest
-	  can :read, Reservation, :hotel_id => user.hotel_id
-	  can :read, Contact, :hotel_id => user.hotel_id
-	  can :read, Availability, :hotel_id => user.hotel_id
-      end
+    if user.role? :super_admin
+      can :manage, :all
+    elsif user.role? :restaurant_admin
+      #can :manage, [Restaurant, Room, Guest, Reservation]
+      can :manage, Restaurant, :id => user.restaurant_id
+      can :manage, Room, :restaurant_id => user.restaurant_id
+      can :manage, Guest
+      can :manage, Reservation, :restaurant_id => user.restaurant_id
+      can :manage, Contact, :restaurant_id => user.restaurant_id
+      can :manage, Availability, :restaurant_id => user.restaurant_id
+      can :update, User, :id => user.id
+    elsif user.role? :restaurant_staff
+      #can :read, [Restaurant, Room, Guest, Reservation]
+      can :read, Restaurant, :id => user.restaurant_id
+      can :read, Room, :restaurant_id => user.restaurant_id
+      can :read, Guest
+      can :read, Reservation, :restaurant_id => user.restaurant_id
+      can :read, Contact, :restaurant_id => user.restaurant_id
+      can :read, Availability, :restaurant_id => user.restaurant_id
+    end
 
     # Define abilities for the passed in user here. For example:
     #

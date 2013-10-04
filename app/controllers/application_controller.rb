@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   before_filter :redirect_to_subdomain_page
 
   private
-  def load_hotel
-    @hotel = Hotel.find_by_slug!(request.subdomain)
+  def load_restaurant
+    @restaurant = Restaurant.find_by_slug!(request.subdomain)
   end
 
   helper_method :background_images

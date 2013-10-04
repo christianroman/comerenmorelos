@@ -8,10 +8,10 @@ Comerenmorelos::Application.routes.draw do
     devise_for :users, :path => 'auth', :controllers => { :sessions => 'admin/sessions' }, :skip => :registrations
     resources :users, :path => 'usuarios'
 
-    root :to => 'hotels#index'
+    root :to => 'restaurants#index'
 
-    #resources :hotels, :path => 'hoteles'
-    resources :hotels, :path => 'hoteles'
+    #resources :restaurants, :path => 'restaurantes'
+    resources :restaurants, :path => 'restaurantes'
     resources :fares, :path => 'rangotarifas'
     resources :destinations, :except => [:show], :path => 'destinos'
     resources :categories, :path => 'categorias'
@@ -35,7 +35,7 @@ Comerenmorelos::Application.routes.draw do
 
     resources :home, :only => [:index]
 
-    resources :hotels, :only => [:index, :show, :create], :path => 'hoteles'
+    resources :restaurants, :only => [:index, :show, :create], :path => 'restaurantes'
     resources :destinations, :only => [:index], :path => 'destinos'
     resources :categories, :only => [:index], :path => 'categorias'
     resources :fares, :only => [:index], :path => 'tarifas'
@@ -46,14 +46,14 @@ Comerenmorelos::Application.routes.draw do
 
   resources :search, :only => :index
 
-  resources :hotels, :path => 'hoteles', :only => [:show, :create]
-  #match '', to: 'hotels#show', constraints: {subdomain: /.+/}
-  match '', to: 'hotels#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
-  #match '/' => 'hotels#show', constraints: { subdomain: /^(?!www$)(.+)$/i }
+  resources :restaurants, :path => 'restaurantes', :only => [:show, :create]
+  #match '', to: 'restaurants#show', constraints: {subdomain: /.+/}
+  match '', to: 'restaurants#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  #match '/' => 'restaurants#show', constraints: { subdomain: /^(?!www$)(.+)$/i }
 
   resources :pages, :path => 'paginas', :only => :show
 
-  post 'hoteles/:id/reservar' => 'hotels#create'
+  post 'restaurantes/:id/reservar' => 'restaurants#create'
 
   resources :payment_notifications
 

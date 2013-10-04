@@ -1,6 +1,6 @@
-<%= form_for([:admin, @hotel], :html => {:multipart => true }) do |f| %>
+<%= form_for([:admin, @restaurant], :html => {:multipart => true }) do |f| %>
 
-    <%= render 'admin/errors', object: @hotel %>
+    <%= render 'admin/errors', object: @restaurant %>
 
     <table class="table table-bordered">
 	<tr>
@@ -40,7 +40,7 @@
 		<%= f.label :destination_id, 'Destino' %>
 	    </td>
 	    <td>
-		<%= collection_select :hotel, :destination_id, Destination.all, :id, :name, {}, { :class => 'input-select' } %>
+		<%= collection_select :restaurant, :destination_id, Destination.all, :id, :name, {}, { :class => 'input-select' } %>
 	    </td>
 	</tr>
 	<tr>
@@ -72,7 +72,7 @@
 		<%= f.label :fare_id, 'Rango de tarifa' %>
 	    </td>
 	    <td>
-		<%= collection_select :hotel, :fare_id, Fare.all, :id, :name, {}, { :class => 'input-select' } %>
+		<%= collection_select :restaurant, :fare_id, Fare.all, :id, :name, {}, { :class => 'input-select' } %>
 	    </td>
 	</tr>
 	<tr>
@@ -122,7 +122,7 @@
 				<% if category.nil? %>
 				    <td>&nbsp;</td>
 				<% else %>
-				    <td><%= check_box_tag :category_ids, category.id, @hotel.categories.include?(category), :name => 'hotel[category_ids][]' %><%= label_tag dom_id(category), category.name %></td>
+				    <td><%= check_box_tag :category_ids, category.id, @restaurant.categories.include?(category), :name => 'restaurant[category_ids][]' %><%= label_tag dom_id(category), category.name %></td>
 				<% end %>
 			    <% end %>
 			</tr>
@@ -136,7 +136,7 @@
 	    </td>
 	    <td>
 		<table class="table table-bordered">
-		    <%= f.fields_for :photos, @hotel.photos do |builder| %>
+		    <%= f.fields_for :photos, @restaurant.photos do |builder| %>
 			<% if builder.object.new_record? %>
 			    <tr>
 				<td><%= builder.file_field :data %></td>
@@ -152,7 +152,7 @@
 	    </td>
 	    <td>
 		<table class="table table-bordered table-photos">
-		    <%= f.fields_for :photos, @hotel.photos do |builder| %>
+		    <%= f.fields_for :photos, @restaurant.photos do |builder| %>
 			<% unless builder.object.new_record? %>
 			    <tr>
 				<td><%= image_tag builder.object.data.url(:big) %></td>
