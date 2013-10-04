@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Comermorelos::Application.load_tasks
+Comerenmorelos::Application.load_tasks
