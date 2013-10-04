@@ -1,0 +1,57 @@
+<div class="button-wrapper">
+    <%= link_to 'Regresar', admin_contacts_path, :class => 'btn' %>
+    <%= link_to 'Editar', edit_admin_contact_path(@contact), :class => 'btn' %>
+</div>
+
+<table class="table table-bordered table-striped">
+
+    <tr>
+	<td width="121">&nbsp;</td>
+	<td>
+	    <h2>Contacto No. <%= @contact.id %></h2>
+	</td>
+    </tr>
+
+    <tr>
+	<td><b>Contacto creado</b></td>
+	<td><%= @contact.created_at.strftime("%d/%m/%Y %I:%M%p") %></td>
+    </tr>
+    <tr>
+	<td><b>Contacto actualizado</b></td>
+	<td><%= @contact.updated_at.strftime("%d/%m/%Y %I:%M%p") %></td>
+    </tr>
+
+    <tr>
+	<td><b>Hotel</b></td>
+	<td><%= link_to @contact.hotel.name, admin_hotels_path(@contact.hotel) %></td>
+    </tr>
+
+    <tr>
+	<td><b>Habitación</b></td>
+	<td><%= @contact.room.nil? ? 'Ninguna' : link_to("#{@contact.room.name} ($#{@contact.room.fare})", admin_rooms_path(@contact.room)) %></td>
+    </tr>
+    <tr>
+	<td><b>Cliente</b></td>
+	<td><%= @contact.guest.nil? ? 'Ninguno' : link_to(@contact.guest.name, admin_guest_path(@contact.guest)) %></td>
+    </tr>
+    <tr>
+	<td><b>Check-in</b></td>
+	<td><%= @contact.check_in %></td>
+    </tr>
+    <tr>
+	<td><b>Check-out</b></td>
+	<td><%= @contact.check_out %></td>
+    </tr>
+    <tr>
+	<td><b>Adultos</b></td>
+	<td><%= @contact.adults %></td>
+    </tr>
+    <tr>
+	<td><b>Niños</b></td>
+	<td><%= @contact.children %></td>
+    </tr>
+    <tr>
+	<td><b>Comentario</b></td>
+	<td><%= @contact.comment %></td>
+    </tr>
+</table>

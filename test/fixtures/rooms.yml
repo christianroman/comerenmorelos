@@ -1,0 +1,13 @@
+one:
+  hotel_id: 1
+  name: MyString
+  rate: 9.99
+  existence: 1
+  available: 1
+
+two:
+  hotel_id: 1
+  name: MyString
+  rate: 9.99
+  existence: 1
+  available: 1

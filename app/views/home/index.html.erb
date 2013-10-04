@@ -1,0 +1,109 @@
+<span class="page_subtitle2 blur">CONSTRUYE TU CRITERIO DE BÚSQUEDA CON LAS SIGUIENTES OPCIONES</span>
+
+<%= form_tag('/search', :method => 'get', :name => 'search_form') do %>
+
+    <div class="boxes">
+
+	<div class="box1">
+
+	    <span class="box_title">DESTINO O ZONA</span>
+
+	    <table class="">
+		<% @destinations.each_with_index do |destination,i| %>
+
+			<% if i % 2 == 0 %>
+			    <tr>
+			<% end %>
+			
+			<td>
+			    <label><%= check_box_tag "destinations[]", destination.id %> <%= destination.name %></label>
+			</td>
+
+			<% if i % 2 != 0 %>
+			    </tr>
+			<% end %>
+
+		<% end %>
+
+		<td>
+		    <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
+		</td>
+
+		<%= '</tr>'.html_safe %>
+
+	    </table>
+
+	</div>
+
+	<div class="box2">
+
+	    <span class="box_title">RANGO DE TARIFAS</span>
+
+	    <table>
+		<% @fares.each_with_index do |fare, i| %>
+
+		    <% if i % 2 == 0 %>
+		        <tr>
+		    <% end %>
+			
+		    <td>
+		        <label><%= check_box_tag "fares[]", fare.id %> <%= fare.name %></label>
+		    </td>
+		    
+		    <% if i % 2 != 0 %>
+			</tr>
+		    <% end %>
+
+		<% end %>
+
+		<td>
+		    <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
+		</td>
+
+		<%= '</tr>'.html_safe %>		
+
+	    </table>
+
+	</div>
+
+	<div class="box3">
+
+	    <span class="box_title">SEGMENTO O VOCACIÓN</span>
+
+	    <table>
+
+		<% @categories.each_with_index do |category, i| %>
+
+		    <% if i % 2 == 0 %>
+			<tr>
+		    <% end %>
+			
+		    <td>
+		        <label><%= check_box_tag "categories[]", category.id %> <%= category.name %></label>
+		    </td>
+
+		    <% if i % 2 != 0 %>
+		        </tr>
+		    <% end %>
+
+		<% end %>
+
+		<td>
+		    <label><%= check_box_tag('check_all', 'check_all', false, :class => 'check_all') %> Todos</label>
+		</td>
+
+		<%= '</tr>'.html_safe %>		
+
+	    </table>
+
+	</div>
+
+	<div class="clearfix"></div>
+
+    </div>
+
+    <%= button_tag(type: 'submit', class: 'btn btn-large btn-custom') do %>
+	BUSCAR UN HOTEL
+    <% end %>
+
+<% end %>

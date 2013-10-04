@@ -1,0 +1,42 @@
+<%= form_for [:admin, @guest] do |f| %>
+
+    <%= render 'admin/errors', object: @guest %>
+
+    <table class="table table-bordered">
+	<tr>
+	    <td>
+		<%= f.label :hotel_id, 'Hotel' %>
+	    </td>
+	    <td>
+		<%= collection_select :guest, :hotel_id, @current_hotel.nil? ? Hotel.all : Array(current_admin_user.hotel), :id, :name, {}, { :class => 'input-select' } %>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
+		<%= f.label :name, 'Nombre' %>
+	    </td>
+	    <td>
+		<%= f.text_field :name, :class => 'input-xlarge' %>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
+		<%= f.label :email, 'Email' %>
+	    </td>
+	    <td>
+		<%= f.text_field :email, :class => 'input-xlarge' %>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
+		<%= f.label :phone, 'Teléfono' %>
+	    </td>
+	    <td>
+		<%= f.text_field :phone, :class => 'input-xlarge' %>
+	    </td>
+	</tr>
+    </table>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+
+<% end %>

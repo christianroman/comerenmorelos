@@ -1,0 +1,36 @@
+<table class="table table-bordered">
+    <tr>
+	<td>
+	    <%= f.label :fare, 'Tarifa' %>
+	</td>
+	<td>
+	    <%= f.text_field :fare, :class => 'input-xlarge' %>
+	</td>
+    </tr>
+    <tr>
+	<td>
+	    <%= f.label :start_date, 'Fecha de inicio' %>
+	</td>
+	<td>
+	    <%= f.date_select :start_date %>
+	</td>
+    </tr>
+    <tr>
+	<td>
+	    <%= f.label :end_date, 'Fecha de fin' %>
+	</td>
+	<td>
+	    <%= f.date_select :end_date %>
+	</td>
+    </tr>
+    <% if f.object.persisted? %>
+	<tr>
+	    <td>
+		<%= f.label :_destroy, "Eliminar tarifa" %>
+	    </td>
+	    <td>
+		<%= f.check_box :_destroy %>
+	    </td>
+	</tr>
+    <% end %>
+</table>

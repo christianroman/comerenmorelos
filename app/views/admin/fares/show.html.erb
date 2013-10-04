@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @fare.id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @fare.name %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @fare.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @fare.end %>
+</p>
+
+
+<%= link_to 'Edit', edit_fare_path(@fare) %> |
+<%= link_to 'Back', fares_path %>

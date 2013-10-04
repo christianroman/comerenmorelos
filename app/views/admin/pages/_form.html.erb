@@ -1,0 +1,18 @@
+<%= form_for [:admin, @page] do |f| %>
+
+    <%= render 'admin/errors', object: @page %>
+
+    <table class="table table-bordered">
+	<tr>
+	    <td><%= f.label :title, 'Titulo' %></td>
+	    <td><%= f.text_field :title, :class => 'input-xlarge' %></td>
+	</tr>
+	<tr>
+	    <td><%= f.label :body, 'Cuerpo' %></td>
+	    <td><%= f.cktext_area :body, :class => "textarea-ckeditor", :ckeditor => {:language => "es"} %></td>
+	</tr>
+    </table>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+
+<% end %>

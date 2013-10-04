@@ -1,0 +1,44 @@
+<%= form_for([:admin, @setting], :html => {:multipart => true}) do |f| %>
+
+    <%= render 'admin/errors', object: @setting %>
+
+    <table class="table table-bordered">
+
+	<tr>
+	    <td>
+		<b>Fondos actuales</b>
+	    </td>
+	    <td>
+		<table class="table table-bordered table-photos">
+		    <%= f.fields_for :assets, @setting.assets do |builder| %>
+			<% unless builder.object.new_record? %>
+			    <tr>
+				<td><%= image_tag builder.object.data.url %></td>
+				<td><%= builder.check_box :_destroy %><strong>¿Eliminar?</strong></td>
+			    </tr>
+			<% end %>
+		    <% end %>
+		</table>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
+		<b>Espacios disponibles</b>
+	    </td>
+	    <td>
+		<table class="table table-bordered">
+		    <%= f.fields_for :assets, @setting.assets do |builder| %>
+			<% if builder.object.new_record? %>
+			    <tr>
+				<td><%= builder.file_field :data %></td>
+			    </tr>
+			<% end %>
+		    <% end %>
+		</table>
+	    </td>
+	</tr>
+    </table>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+
+<% end %>

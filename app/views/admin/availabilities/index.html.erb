@@ -1,0 +1,35 @@
+<div class="well">
+    <h2>Fechas</h2>
+</div>
+
+<div class="button-wrapper">
+    <%= link_to 'Nueva Fecha', new_admin_availability_path, :class => 'btn btn-primary' %>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+	<tr>
+	    <th>Id</th>
+	    <th>Hotel</th>
+	    <th>Inicio</th>
+	    <th>Fin</th>
+	    <th></th>
+	    <th></th>
+	</tr>
+    </thead>
+    <tbody>
+	<% @availabilities.each do |availability| %>
+	    <tr>
+		<td><%= link_to availability.id, admin_availability_path(availability) %></td>
+		<td><%= link_to availability.hotel.name, admin_hotel_path(availability.hotel) %></td>
+		<td><%= availability.start_date %></td>
+		<td><%= availability.end_date %></td>
+		<td><%= link_to 'Editar', edit_admin_availability_path(availability), :class => 'btn btn-small' %></td>
+		<td><%= link_to 'Eliminar', [:admin, availability], method: :delete, data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-small btn-danger' %></td>
+	    </tr>
+	<% end %>
+    </tbody>
+</table>
+
+<br />
+

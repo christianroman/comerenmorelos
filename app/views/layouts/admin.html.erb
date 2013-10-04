@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Tu Hotel en Morelos Admin</title>
+	<%= stylesheet_link_tag    "admin", :media => "all" %>
+	<%= javascript_include_tag "admin" %>
+	<%= csrf_meta_tags %>
+    </head>
+    <body>
+
+	<div class="navbar navbar-inverse">
+	    <div class="navbar-inner">
+		<div class="container">
+		    <a class="brand" href="/admin"><%= admin_user_signed_in? ? current_admin_user.role?(:super_admin) ? 'Tu Hotel en Morelos Admin' : current_admin_user.hotel.name : 'Tu Hotel en Morelos Admin' %></a>
+
+		    <% if admin_user_signed_in? %>
+			<div class="nav-collapse">
+
+			    <ul class="nav">
+				<li class="<%= active_class?(admin_hotels_path) %>">
+				<%= link_to current_admin_user.role?(:super_admin) ? 'Hoteles' : 'Hotel', admin_hotels_path %>
+				</li>
+				<% if can? :manage, Destination %>
+				    <li class="<%= active_class?(admin_destinations_path) %>"><%= link_to 'Destinos', admin_destinations_path %></li>
+				<% end %>
+				<% if can? :manage, Category %>
+				    <li class="<%= active_class?(admin_categories_path) %>"><%= link_to 'Categorias', admin_categories_path %></li>
+				<% end %>
+				<% unless current_admin_user.role?(:super_admin) %>
+				    <li class="<%= active_class?(admin_rooms_path) %>"><%= link_to 'Habitaciones', admin_rooms_path %></li>
+				<% end %>
+				<li class="<%= active_class?(admin_guests_path) %>"><%= link_to 'Clientes', admin_guests_path %></li>
+				<% unless current_admin_user.role?(:super_admin) %>
+				    <li class="<%= active_class?(admin_reservations_path) %>"><%= link_to 'Reservaciones', admin_reservations_path %></li>
+				<% end %>
+				<% unless current_admin_user.role?(:super_admin) %>
+				    <li class="<%= active_class?(admin_contacts_path) %>"><%= link_to 'Contactos', admin_contacts_path %></li>
+				<% end %>
+				<% unless current_admin_user.role?(:super_admin) %>
+				    <li class="<%= active_class?(admin_availabilities_path) %>"><%= link_to 'Fechas', admin_availabilities_path %></li>
+				<% end %>
+				<% if can? :manage, Page %>
+				    <li class="<%= active_class?(admin_pages_path) %>"><%= link_to 'Paginas', admin_pages_path %></li>
+				<% end %>
+				<% if can? :manage, User %>
+				    <li class="<%= active_class?(admin_users_path) %>"><%= link_to 'Usuarios', admin_users_path %></li>
+				<% end %>
+				<% if can? :manage, Setting %>
+				    <li><%= link_to 'Ajustes', '/admin/ajustes' %></li>
+				<% end %>
+			    </ul>
+
+			    <ul class="nav pull-right">
+				<li class="divider-vertical"></li>
+				<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= admin_user_signed_in? ? current_admin_user.email : 'Usuario' %><b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				    <li><%= link_to 'Cambiar contraseña', edit_admin_user_path(current_admin_user) %></li>
+				    <li class="divider"></li>
+				    <li><%= link_to 'Cerrar sesión', destroy_admin_user_session_path %></li>
+				</ul>
+				</li>
+			    </ul>
+
+			</div>
+		    <% end %>
+		</div>
+	    </div>
+	</div>
+
+	<div class="container">
+
+	    <%= render :partial => 'admin/flash', :locals => {:flash => flash} %>
+	    <%= yield %>
+
+	</div>
+
+	<div class="admin-footer"></div>
+
+    </body>
+</html>

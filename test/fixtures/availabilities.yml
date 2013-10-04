@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hotel_id: 1
+  start_date: 2013-07-03
+  end_date: 2013-07-03
+
+two:
+  hotel_id: 1
+  start_date: 2013-07-03
+  end_date: 2013-07-03

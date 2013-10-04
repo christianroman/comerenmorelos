@@ -1,0 +1,89 @@
+<%= form_for([:admin, @reservation]) do |f| %>
+
+    <%= render 'admin/errors', object: @reservation %>
+
+    <table class="table table-bordered">
+	<tr>
+	    <td>
+		<%= f.label :hotel_id, 'Hotel' %>
+	    </td>
+	    <td>
+		<%= collection_select :reservation, :hotel_id, @current_hotel.nil? ? Hotel.all : Array(current_admin_user.hotel), :id, :name, {}, { :class => 'input-select' } %>
+	    </td>
+	    <tr>
+		<td>
+		    <%= f.label :room_id, 'Habitación' %>
+		</td>
+		<td>
+		    <%= f.grouped_collection_select :room_id, @current_hotel.nil? ? Hotel.all : Array(current_admin_user.hotel), :rooms, :name, :id, :name %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :guest_id, 'Cliente' %>
+		</td>
+		<td>
+		    <%= f.grouped_collection_select :guest_id, @current_hotel.nil? ? Hotel.all : Array(current_admin_user.hotel), :guests, :name, :id, :name %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :check_in, 'Check-in' %>
+		</td>
+		<td>
+		    <%= f.date_select :check_in, :class => 'input-xlarge' %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :check_out, 'Check-out' %>
+		</td>
+		<td>
+		    <%= f.date_select :check_out, :class => 'input-xlarge' %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :adults, 'Adultos' %>
+		</td>
+		<td>
+		    <%= f.number_field :adults, :class => 'input-xlarge' %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :children, 'Niños' %>
+		</td>
+		<td>
+		    <%= f.number_field :children, :class => 'input-xlarge' %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :comment, 'Comentario' %>
+		</td>
+		<td>
+		    <%= f.text_area :comment, :cols => 20, :rows => 3, :class => 'input-textarea' %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :total_amount, 'Total' %>
+		</td>
+		<td>
+		    <%= f.text_field :total_amount, :class => 'input-xlarge' %>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <%= f.label :status, 'Estado' %>
+		</td>
+		<td>
+		    <%= f.number_field :status, :class => 'input-xlarge' %>
+		</td>
+	    </tr>
+	</table>
+
+	<%= f.submit :class => 'btn btn-primary' %>
+
+    <% end %>

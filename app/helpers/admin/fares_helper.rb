@@ -1,0 +1,2 @@
+module Admin::FaresHelper
+end

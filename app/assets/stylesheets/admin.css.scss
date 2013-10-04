@@ -1,0 +1,46 @@
+//= require_self
+
+@import 'bootstrap';
+@import 'bootstrap-datepicker';
+
+.well h1, .well h2 {
+    margin:0px 5px;
+}
+
+.admin-footer{
+    height:20px;
+}
+
+form label {
+    font-weight:bold;
+}
+
+.table-photos td {
+    text-align:center;
+    vertical-align:middle;
+}
+
+.input-select {
+    width:285px;
+}
+
+.input-textarea{
+    width:270px;
+}
+
+.photo{
+    margin:5px 5px 15px 5px;
+}
+
+.input-datepicker {
+    width:241px;
+}
+
+.button-wrapper {
+    margin-bottom:20px;
+}
+
+table.totals {
+    text-align:right;
+    width:105px;
+}

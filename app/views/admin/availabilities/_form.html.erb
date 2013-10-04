@@ -1,0 +1,34 @@
+<%= form_for([:admin, @availability]) do |f| %>
+
+    <%= render 'admin/errors', object: @availability %>
+
+    <table class="table table-bordered">
+	<tr>
+	    <td>
+		<%= f.label :hotel_id, 'Hotel' %>
+	    </td>
+	    <td>
+		<%= collection_select :availability, :hotel_id, @current_hotel.nil? ? Hotel.all : Array(current_admin_user.hotel), :id, :name, {}, { :class => 'input-select' } %>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
+		<%= f.label :start_date, 'Inicio' %>
+	    </td>
+	    <td>
+		<%= f.date_select :start_date, :class => 'input-xlarge' %>
+	    </td>
+	</tr>
+	<tr>
+	    <td>
+		<%= f.label :end_date, 'Fin' %>
+	    </td>
+	    <td>
+		<%= f.date_select :end_date, :class => 'input-xlarge' %>
+	    </td>
+	</tr>
+    </table>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+
+<% end %>

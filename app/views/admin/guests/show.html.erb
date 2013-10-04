@@ -1,0 +1,27 @@
+<div class="button-wrapper clearfix">
+    <%= link_to "Regresar", admin_guests_path, :class => 'btn' %>
+    <%= link_to "Editar", edit_admin_guest_path(@guest), :class => 'btn' %>
+</div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+	<td width="121">&nbsp;</td>
+	<td><h2>Cliente</h2></td>
+    </tr>
+    <tr>
+	<td><b>Nombre</b></td>
+	<td><%= @guest.name %></td>
+    </tr>
+    <tr>
+	<td><b>Email</b></td>
+	<td><%= @guest.email %></td>
+    </tr>
+    <tr>
+	<td><b>Teléfono</b></td>
+	<td><%= @guest.phone %></td>
+    </tr>
+    <tr>
+	<td><b>Hotel</b></td>
+	<td><%= @guest.hotel.nil? ? 'Ninguno asociado' : @guest.hotel.name %></td>
+    </tr>
+</table>

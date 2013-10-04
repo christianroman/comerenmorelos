@@ -1,0 +1,30 @@
+<div class="well">
+    <h2>Categorias</h2>
+</div>
+
+<div class="button-wrapper">
+<%= link_to 'Nueva Categoria', new_admin_category_path, :class => 'btn btn-primary' %>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+	<tr>
+	    <th>Categoria</th>
+	    <th>No. Hoteles</th>
+	    <th></th>
+	    <th></th>
+	</tr>
+    </thead>
+    <tbody>
+	<% @categories.each do |category| %>
+	    <tr>
+		<td><%= link_to category.name, admin_category_path(category) %></td>
+		<td><%= category.hotels.count %></td>
+		<td><%= link_to 'Editar', edit_admin_category_path(category), :class => 'btn btn-small' %></td>
+		<td><%= link_to 'Eliminar', [:admin, category], method: :delete, data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-small btn-danger' %></td>
+	    </tr>
+	<% end %>
+    </tbody>
+</table>
+
+<br />

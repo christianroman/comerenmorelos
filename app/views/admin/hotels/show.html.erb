@@ -1,0 +1,94 @@
+<div class="button-wrapper">
+    <%= link_to 'Regresar', admin_hotels_path, :class => 'btn' %>
+    <%= link_to 'Editar', edit_admin_hotel_path(@hotel), :class => 'btn' %>
+</div>
+
+
+<table class="table table-bordered table-striped">
+    <tr>
+	<td width="121">&nbsp;</td>
+	<td>
+	    <h2><%= @hotel.name %></h2>
+	</td>
+    </tr>
+    <tr>
+	<td><b>Calle</b></td>
+	<td><%= @hotel.street %></td>
+    </tr>
+    <tr>
+	<td><b>Colonia</b></td>
+	<td><%= @hotel.district %></td>
+    </tr>
+    <tr>
+	<td><b>Codigo Postal</b></td>
+	<td><%= @hotel.zipcode %></td>
+    </tr>
+    <tr>
+	<td><b>Destino</b></td>
+	<td><%= @hotel.destination.name %></td>
+    </tr>
+    <tr>
+	<td><b>Telefonos</b></td>
+	<td><%= @hotel.phone %></td>
+    </tr>
+
+    <tr>
+	<td><b>Sitio web</b></td>
+	<td><%= @hotel.website.nil? ? '' : "<a href=\"http://#{@hotel.website.gsub('http://', '')}\" target=\"_blank\">#{@hotel.website}</a>".html_safe %></td>
+    </tr>
+
+    <tr>
+	<td><b>Email</b></td>
+	<td><%= @hotel.email %></td>
+    </tr>
+
+    <tr>
+	<td><b>Rango de tarifas</b></td>
+	<td><%= @hotel.fare.name %></td>
+    </tr>
+
+    <tr>
+	<td><b>URL de Video</b></td>
+	<td><%= @hotel.video.nil? ? '' : "<a href=\"http://#{@hotel.video.gsub('http://','')}\" target=\"_blank\">#{@hotel.video}</a>".html_safe %></td>
+    </tr>
+
+    <tr>
+	<td><b>Correo de cuenta Paypal</b></td>
+	<td><%= @hotel.paypal %></td>
+    </tr>
+
+    <tr>
+	<td><b>Descripción</b></td>
+	<td><%= @hotel.description %></td>
+    </tr>
+    <tr>
+	<td><b>Widget HTML</b></td>
+	<td><pre><%= "<script src=\"#{root_url}hoteles/#{@hotel.id}.js\" type=\"text/javascript\"></script>" %></pre></td>
+	</tr>
+	<tr>
+	    <td><b>Activo</b></td>
+	    <td><span class="label label-<%= @hotel.active ? 'success' : 'important' %>"><%= @hotel.active ? 'Activo' : 'Inactivo' %></span></td>
+	</tr>
+	<tr>
+	    <td><b>Categorias</b></td>
+	    <td>
+		<ul>
+		    <% @hotel.categories.each do |category| %>
+			<li><%= link_to category.name, (can? :manage, Category) ? admin_category_path(category) : '#' %></li>
+		    <% end %>
+		</ul>
+	    </td>
+	</tr>
+	<tr>
+	    <td><b>Fotografias agregadas</b></td>
+	    <td>
+		<% @hotel.photos.each do |photo| %>
+		    <div class="photo">
+			<%= image_tag photo.data.url(:big), :class => 'img-rounded' %>
+		    </div>
+		<% end %>
+	    </td>
+	</tr>
+    </table>
+
+

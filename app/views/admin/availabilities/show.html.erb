@@ -1,0 +1,26 @@
+<div class="button-wrapper">
+    <%= link_to 'Regresar', admin_availabilities_path, :class => 'btn' %>
+    <%= link_to 'Editar', edit_admin_availability_path(@availability), :class => 'btn' %>
+</div>
+
+<table class="table table-bordered table-striped">
+
+    <tr>
+	<td width="121">&nbsp;</td>
+	<td>
+	    <h2>Fecha No. <%= @availability.id %></h2>
+	</td>
+    </tr>
+    <tr>
+	<td><b>Hotel</b></td>
+	<td><%= link_to @availability.hotel.name, admin_hotels_path(@availability.hotel) %></td>
+    </tr>
+    <tr>
+	<td><b>Inicio</b></td>
+	<td><%= @availability.start_date %></td>
+    </tr>
+    <tr>
+	<td><b>Fin</b></td>
+	<td><%= @availability.end_date %></td>
+    </tr>
+</table>

@@ -1,0 +1,115 @@
+<script type="text/javascript">
+$(function() {
+	$( "#hotel-embed-widget #check_in" ).datepicker({
+	    changeMonth: true,
+	    minDate: 0,
+	    dateFormat: 'dd/mm/yy',
+	    onClose: function( selectedDate ) {
+		var date2 = $(this).datepicker('getDate'); 
+  		date2.setDate(date2.getDate()+1); 
+		$( "#hotel-embed-widget #check_out" ).datepicker( "option", "minDate", date2 );
+	    }
+	});
+	$( "#hotel-embed-widget #check_out" ).datepicker({
+	    changeMonth: true,
+	    dateFormat: 'dd/mm/yy'
+	});
+});
+</script>
+
+<style type="text/css">
+    #hotel-embed-widget {
+	width: 250px;
+	height:450px;
+	overflow:auto;
+	padding: 4px;
+	border: 1px solid black;
+	font-family:verdana;
+	background-color:white;
+	color: #333;
+    }  
+    #hotel-embed-widget h2 {
+	font-size: 16px;
+	color: #000;
+	text-align:center;
+	margin: 4px auto;
+    }
+    #hotel-embed-widget h3 em {
+	font-size: 14px;
+	text-style: italic;
+	color: #333;
+    }
+</style>
+
+<div id="hotel-embed-widget">
+
+    <%= form_tag("#{root_url}hoteles/#{@hotel.id}/reservar", :method => 'post', :name => 'reservation_form', :class => 'form-horizontal') do %>
+	<div class="control-group">
+	    <%= label_tag 'nombre', 'Nombre', :class => 'control-label' %>
+	    <div class="controls">
+		<%= text_field_tag 'nombre', nil, :placeholder => 'Nombre completo', :class => 'input-xlarge' %>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'email', 'E-mail', :class => 'control-label' %>
+	    <div class="controls">
+		<%= text_field_tag 'email', nil, :placeholder => 'ejemplo@dominio.com', :class => 'input-xlarge' %>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'telefono', "Teléfono", :class => 'control-label' %>
+	    <div class="controls">
+		<%= text_field_tag 'telefono', nil, :placeholder => '(55) 5626874', :class => 'input-xlarge' %>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'check_in', 'Fecha de llegada', :class => 'control-label' %>
+	    <div class="controls">
+		<div class="input-append date datepicker-checkin" data-date="<%= Time.now.strftime('%d/%m/%Y') %>" data-date-format="dd-mm-yyyy">
+		    <%= text_field_tag 'check_in', Time.now.strftime('%d/%m/%Y'), :placeholder => 'Seleccionar fecha de llegada', :class => 'input-datepicker', :readonly => true %><span class="add-on"><i class="icon-th"></i></span></input>
+		</div>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'check_out', 'Fecha de salida', :class => 'control-label' %>
+	    <div class="controls">
+		<div class="input-append date datepicker-checkout" data-date="<%= (Time.now + 1.days).strftime('%d/%m/%Y') %>" data-date-format="dd-mm-yyyy">
+		    <%= text_field_tag 'check_out', (Time.now + 1.days).strftime('%d/%m/%Y'), :placeholder => 'Seleccionar fecha de salida', :class => 'input-datepicker', :readonly => true %><span class="add-on"><i class="icon-th"></i></span></input>
+		</div>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'room', 'Habitación', :class => 'control-label' %>
+	    <div class="controls">
+		<%= collection_select(:room, :room_id, @hotel.rooms, :id, :name_and_fare, {:prompt => 'Seleccionar Habitación'}, {:class => 'select_form'}) %>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'adults', 'Adultos', :class => 'control-label' %>
+	    <div class="controls">
+		<%= select_tag 'adults', (1..10).map{|i| "<option>#{i}</option>"}.join.html_safe, :class => 'select_form' %>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'children', 'Niños', :class => 'control-label' %>
+	    <div class="controls">
+		<%= select_tag 'children', (1..10).map{|i| "<option>#{i}</option>"}.join.html_safe, :class => 'select_form' %>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <%= label_tag 'comentario', 'Comentario', :class => 'control-label' %>
+	    <div class="controls">
+		<%= text_area_tag 'comentario', nil, :rows => 3, :class => 'input-xlarge' %>
+	    </div>
+	</div>
+	<div class="control-group">
+	    <div class="controls">
+		<%= button_tag(type: 'submit', class: 'btn btn-custom pull-right') do %>
+		    Reserva ya
+		<% end %>
+	    </div>
+	</div>
+
+    <% end %>
+
+</div>

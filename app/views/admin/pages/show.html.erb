@@ -1,0 +1,23 @@
+<div class="button-wrapper clearfix">
+    <%= link_to 'Regresar', admin_pages_path, :class => 'btn' %>
+    <%= link_to 'Editar', edit_admin_page_path(@page), :class => 'btn' %>
+</div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+	<td width="121">&nbsp;</td>
+	<td>
+	    <h2><%= @page.title %></h2>
+	</td>
+    </tr>
+    <tr>
+	<td><b>Cuerpo</b></td>
+	<td>
+	    <div>
+		<%= @page.body.html_safe %>
+	    </div>
+	</td>
+    </tr>
+</table>
+
+<br />

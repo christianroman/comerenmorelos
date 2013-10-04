@@ -1,0 +1,31 @@
+<span class="page_title blur">Hoteles</span>
+
+<div class="results alpha">
+
+<% for hotel in @hotels %>
+
+    <div class="item clearfix">
+
+	<div class="pre">
+	    <span class="helper"></span><%= image_tag hotel.photos.empty? ? 'default.png' : hotel.photos[0].data.url(:thumb) %>
+	</div>
+
+	<div class="info">
+
+	    <h4 class="title"><%= hotel.name %></h4>
+	    <%= "#{hotel.street}, #{hotel.district}, C.P. #{hotel.zipcode}" %><br />
+	    <%= hotel.destination.name %><br />
+	    Teléfonos: <%= hotel.phone %><br />
+	    <%= hotel.email %><br />
+
+	    <!--<%= link_to "Reserva en línea", root_url(subdomain:hotel.slug), :class => "btn btn-purple" %>-->
+	    <%= link_to hotel.paypal.blank? ? 'Solicita información' : 'Reserva en línea', root_url(subdomain:hotel.slug.gsub('-', '')), :class => 'btn btn-purple' %>
+	    <a href="<%= "http://#{hotel.website}" %>" class="btn btn-green" target="_blank">Visitar sitio web</a>
+
+	</div>
+
+    </div>
+
+<% end %>
+
+</div>

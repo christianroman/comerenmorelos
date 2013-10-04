@@ -1,0 +1,15 @@
+
+<%= form_for [:admin, @category] do |f| %>
+
+    <%= render 'admin/errors', object: @category %>
+
+    <table class="table table-bordered">
+	<tr>
+	    <td><%= f.label :name, "Categoria" %></td>
+	    <td><%= f.text_field :name, :class => 'input-xlarge' %></td>
+	</tr>
+    </table>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+
+<% end %>
