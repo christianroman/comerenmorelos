@@ -1,9 +1,9 @@
 class HomeController < ApplicationController
-    def index
+  def index
 
-	@destinations = Destination.all
-	@fares = Fare.all
-	@categories = Category.all
+    @destinations = Destination.all
+    @fares = Fare.all
+    @categories = Category.all
 
-    end
+  end
 end

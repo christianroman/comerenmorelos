@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717212025) do
+ActiveRecord::Schema.define(:version => 20131004163353) do
 
   create_table "assets", :force => true do |t|
     t.datetime "created_at",        :null => false
@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(:version => 20130717212025) do
   end
 
   create_table "availabilities", :force => true do |t|
-    t.integer  "hotel_id"
+    t.integer  "restaurant_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "categories", :force => true do |t|
@@ -78,25 +78,6 @@ ActiveRecord::Schema.define(:version => 20130717212025) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "hotel_id"
-  end
-
-  create_table "hotels", :force => true do |t|
-    t.string   "name"
-    t.string   "street"
-    t.string   "district"
-    t.string   "zipcode"
-    t.integer  "destination_id"
-    t.string   "phone"
-    t.string   "website"
-    t.string   "email"
-    t.integer  "fare_id"
-    t.string   "video"
-    t.string   "paypal"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.text     "description"
-    t.boolean  "active",         :default => true, :null => false
-    t.string   "slug"
   end
 
   create_table "hotels_promos", :force => true do |t|
@@ -152,6 +133,25 @@ ActiveRecord::Schema.define(:version => 20130717212025) do
     t.decimal  "total_amount", :precision => 10, :scale => 0
     t.datetime "purchased_at"
     t.integer  "children"
+  end
+
+  create_table "restaurants", :force => true do |t|
+    t.string   "name"
+    t.string   "street"
+    t.string   "district"
+    t.string   "zipcode"
+    t.integer  "destination_id"
+    t.string   "phone"
+    t.string   "website"
+    t.string   "email"
+    t.integer  "fare_id"
+    t.string   "video"
+    t.string   "paypal"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "description"
+    t.boolean  "active",         :default => true, :null => false
+    t.string   "slug"
   end
 
   create_table "roles", :force => true do |t|

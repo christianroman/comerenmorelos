@@ -3,7 +3,7 @@ module Admin
 	layout 'admin'
 
 	def after_sign_up_path_for(resource)
-	    admin_hotels_path
+	    admin_restaurants_path
 	end
 
 	def new
