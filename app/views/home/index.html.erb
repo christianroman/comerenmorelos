@@ -1,4 +1,4 @@
-<span class="page_subtitle2 blur">CONSTRUYE TU CRITERIO DE BÚSQUEDA CON LAS SIGUIENTES OPCIONES</span>
+<span class="page_subtitle2">CONSTRUYE TU CRITERIO DE BÚSQUEDA CON LAS SIGUIENTES OPCIONES</span>
 
 <%= form_tag('/search', :method => 'get', :name => 'search_form') do %>
 
@@ -6,7 +6,7 @@
 
     <div class="box1">
 
-      <span class="box_title">DESTINO O ZONA</span>
+      <span class="box_title">ZONA PARA COMER</span>
 
       <table class="">
         <% @destinations.each_with_index do |destination,i| %>
@@ -68,7 +68,7 @@
 
 <div class="box3">
 
-  <span class="box_title">SEGMENTO O VOCACIÓN</span>
+  <span class="box_title">TIPO DE COMIDA</span>
 
   <table>
 
@@ -103,7 +103,7 @@
 </div>
 
 <%= button_tag(type: 'submit', class: 'btn btn-large btn-custom') do %>
-  BUSCAR UN HOTEL
+  BUSCAR UN RESTAURANT
 <% end %>
 
 <% end %>

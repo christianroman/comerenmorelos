@@ -29,7 +29,7 @@
   </tr>
   <tr>
     <td><b>Telefonos</b></td>
-    <td><%= @restaurant.phone %></td>
+    <td><%= @restaurant.phone_area_code.nil? ? '' : "(#{@restaurant.phone_area_code})" %> <%= @restaurant.phone %></td>
   </tr>
 
   <tr>
@@ -60,6 +60,18 @@
   <tr>
     <td><b>Descripción</b></td>
     <td><%= @restaurant.description %></td>
+  </tr>
+  <tr>
+    <td><b>Descripcion como llegar</b></td>
+    <td><%= @restaurant.description_place %></td>
+  </tr>
+  <tr>
+    <td><b>Servicios</b></td>
+    <td><%= @restaurant.services %></td>
+  </tr>
+  <tr>
+    <td><b>Coordenadas</b></td>
+    <td><%= @restaurant.lat %>, <%= @restaurant.lng %></td>
   </tr>
   <tr>
     <td><b>Widget HTML</b></td>

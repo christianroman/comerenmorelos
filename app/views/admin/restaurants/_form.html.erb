@@ -1,170 +1,210 @@
 <%= form_for([:admin, @restaurant], :html => {:multipart => true }) do |f| %>
 
-    <%= render 'admin/errors', object: @restaurant %>
+  <%= render 'admin/errors', object: @restaurant %>
 
-    <table class="table table-bordered">
-	<tr>
-	    <td>
-		<%= f.label :name, 'Nombre' %>
-	    </td>
-	    <td>
-		<%= f.text_field :name, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :street, 'Calle' %>
-	    </td>
-	    <td>
-		<%= f.text_field :street, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :district, 'Colonia' %>
-	    </td>
-	    <td>
-		<%= f.text_field :district, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :zipcode, 'Codigo postal' %>
-	    </td>
-	    <td>
-		<%= f.text_field :zipcode, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :destination_id, 'Destino' %>
-	    </td>
-	    <td>
-		<%= collection_select :restaurant, :destination_id, Destination.all, :id, :name, {}, { :class => 'input-select' } %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :phone, 'Telefonos' %>
-	    </td>
-	    <td>
-		<%= f.text_field :phone, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :website, 'Sitio web' %>
-	    </td>
-	    <td>
-		<%= f.text_field :website, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :email, 'Email' %>
-	    </td>
-	    <td>
-		<%= f.text_field :email, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :fare_id, 'Rango de tarifa' %>
-	    </td>
-	    <td>
-		<%= collection_select :restaurant, :fare_id, Fare.all, :id, :name, {}, { :class => 'input-select' } %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :video, 'URL del video' %>
-	    </td>
-	    <td>
-		<%= f.text_field :video, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :paypal, 'Correo de cuenta Paypal' %>
-	    </td>
-	    <td>
-		<%= f.text_field :paypal, :class => 'input-xlarge' %>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<%= f.label :description, 'Descripción' %>
-	    </td>
-	    <td>
-		<%= f.text_area :description, :cols => 20, :rows => 3, :class => 'input-textarea', :maxlength => 342 %>
-		<div id="charleft">342 caracteres restantes</div>
-	    </td>
-	</tr>
-	<% if current_admin_user.role?(:super_admin) %>
-	<tr>
-	    <td>
-		<%= f.label :active, "Activo" %>
-	    </td>
-	    <td>
-		<%= f.check_box :active %>
-	    </td>
-	</tr>
-	<% end %>
-	<tr>
-	    <td>
-		<b>Categorias</b>
-	    </td>
-	    <td>
-		<table class="table table-bordered table-photos">
-		    <% Category.all.in_groups_of(4) do |group| %>
-			<tr>
-			    <% group.each do |category| %>
-				<% if category.nil? %>
-				    <td>&nbsp;</td>
-				<% else %>
-				    <td><%= check_box_tag :category_ids, category.id, @restaurant.categories.include?(category), :name => 'restaurant[category_ids][]' %><%= label_tag dom_id(category), category.name %></td>
-				<% end %>
-			    <% end %>
-			</tr>
-		    <% end %>
-		</table>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<b>Fotografias restantes</b>
-	    </td>
-	    <td>
-		<table class="table table-bordered">
-		    <%= f.fields_for :photos, @restaurant.photos do |builder| %>
-			<% if builder.object.new_record? %>
-			    <tr>
-				<td><%= builder.file_field :data %></td>
-			    </tr>
-			<% end %>
-		    <% end %>
-		</table>
-	    </td>
-	</tr>
-	<tr>
-	    <td>
-		<b>Fotografias actuales</b>
-	    </td>
-	    <td>
-		<table class="table table-bordered table-photos">
-		    <%= f.fields_for :photos, @restaurant.photos do |builder| %>
-			<% unless builder.object.new_record? %>
-			    <tr>
-				<td><%= image_tag builder.object.data.url(:big) %></td>
-				<td><%= builder.check_box :_destroy %><br /><strong>¿Eliminar?</strong></td>
-			    </tr>
-			<% end %>
-		    <% end %>
-		</table>
-	    </td>
-	</tr>
-    </table>
+  <table class="table table-bordered">
+    <tr>
+      <td>
+        <%= f.label :name, 'Nombre' %>
+      </td>
+      <td>
+        <%= f.text_field :name, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :street, 'Calle' %>
+      </td>
+      <td>
+        <%= f.text_field :street, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :district, 'Colonia' %>
+      </td>
+      <td>
+        <%= f.text_field :district, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :zipcode, 'Codigo postal' %>
+      </td>
+      <td>
+        <%= f.text_field :zipcode, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :destination_id, 'Destino' %>
+      </td>
+      <td>
+        <%= collection_select :restaurant, :destination_id, Destination.all, :id, :name, {}, { :class => 'input-select' } %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :phone_area_code, 'Lada' %>
+      </td>
+      <td>
+        <%= f.text_field :phone_area_code, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :phone, 'Telefonos' %>
+      </td>
+      <td>
+        <%= f.text_field :phone, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :website, 'Sitio web' %>
+      </td>
+      <td>
+        <%= f.text_field :website, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :email, 'Email' %>
+      </td>
+      <td>
+        <%= f.text_field :email, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :fare_id, 'Rango de tarifa' %>
+      </td>
+      <td>
+        <%= collection_select :restaurant, :fare_id, Fare.all, :id, :name, {}, { :class => 'input-select' } %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :video, 'URL del video' %>
+      </td>
+      <td>
+        <%= f.text_field :video, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :paypal, 'Correo de cuenta Paypal' %>
+      </td>
+      <td>
+        <%= f.text_field :paypal, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :description, 'Descripción' %>
+      </td>
+      <td>
+        <%= f.text_area :description, :cols => 20, :rows => 3, :class => 'input-textarea', :maxlength => 342 %>
+        <div id="charleft">342 caracteres restantes</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :description_place, 'Descripción como llegar' %>
+      </td>
+      <td>
+        <%= f.text_area :description_place, :cols => 20, :rows => 3, :class => 'input-textarea', :maxlength => 342 %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :services, 'Servicios' %>
+      </td>
+      <td>
+        <%= f.text_area :services, :cols => 20, :rows => 3, :class => 'input-textarea', :maxlength => 300 %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :lat, 'Coordenadas (Latitud)' %>
+      </td>
+      <td>
+        <%= f.text_field :lat, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :lng, 'Coordenadas (Longitud)' %>
+      </td>
+      <td>
+        <%= f.text_field :lng, :class => 'input-xlarge' %>
+      </td>
+    </tr>
+    <% if current_admin_user.role?(:super_admin) %>
+      <tr>
+        <td>
+          <%= f.label :active, "Activo" %>
+        </td>
+        <td>
+          <%= f.check_box :active %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        <b>Categorias</b>
+      </td>
+      <td>
+        <table class="table table-bordered table-photos">
+          <% Category.all.in_groups_of(4) do |group| %>
+            <tr>
+              <% group.each do |category| %>
+                <% if category.nil? %>
+                  <td>&nbsp;</td>
+                <% else %>
+                  <td><%= check_box_tag :category_ids, category.id, @restaurant.categories.include?(category), :name => 'restaurant[category_ids][]' %><%= label_tag dom_id(category), category.name %></td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Fotografias restantes</b>
+      </td>
+      <td>
+        <table class="table table-bordered">
+          <%= f.fields_for :photos, @restaurant.photos do |builder| %>
+            <% if builder.object.new_record? %>
+              <tr>
+                <td><%= builder.file_field :data %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Fotografias actuales</b>
+      </td>
+      <td>
+        <table class="table table-bordered table-photos">
+          <%= f.fields_for :photos, @restaurant.photos do |builder| %>
+            <% unless builder.object.new_record? %>
+              <tr>
+                <td><%= image_tag builder.object.data.url(:big) %></td>
+                <td><%= builder.check_box :_destroy %><br /><strong>¿Eliminar?</strong></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </td>
+    </tr>
+  </table>
 
-    <%= f.submit :class => 'btn btn-primary' %>
+  <%= f.submit :class => 'btn btn-primary' %>
 
 <% end %>

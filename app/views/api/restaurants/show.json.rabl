@@ -1,6 +1,6 @@
 object @restaurant
 
-attributes :id, :name, :street, :district, :zipcode, :phone, :website, :email, :fare_id, :video, :paypal, :description
+attributes :id, :name, :street, :district, :zipcode, :phone, :website, :email, :fare_id, :video, :paypal, :description, :services, :lat, :lng
 
 child :photos do
 
@@ -20,8 +20,4 @@ end
 
 child :destination do
   attributes :id, :name
-end
-
-child :rooms do
-  attributes :id, :name, :fare
 end

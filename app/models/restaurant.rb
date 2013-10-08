@@ -5,7 +5,7 @@ class Restaurant < ActiveRecord::Base
 
   validate :validate_max_categories_have_not_been_reached
 
-  attr_accessible :destination_id, :district, :email, :fare_id, :id, :name, :description, :paypal, :phone, :street, :video, :website, :zipcode, :lat, :lng, :active, :slug, :photos_attributes, :category_ids
+  attr_accessible :destination_id, :district, :email, :fare_id, :id, :name, :description, :description_place, :paypal, :phone_area_code, :phone, :street, :video, :website, :zipcode, :services, :lat, :lng, :active, :slug, :photos_attributes, :category_ids
   belongs_to :fare 
   belongs_to :destination
   has_many :users

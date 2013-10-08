@@ -27,10 +27,6 @@
   </tr>
 
   <tr>
-    <td><b>Habitación</b></td>
-    <td><%= @contact.room.nil? ? 'Ninguna' : link_to("#{@contact.room.name} ($#{@contact.room.fare})", admin_rooms_path(@contact.room)) %></td>
-  </tr>
-  <tr>
     <td><b>Cliente</b></td>
     <td><%= @contact.guest.nil? ? 'Ninguno' : link_to(@contact.guest.name, admin_guest_path(@contact.guest)) %></td>
   </tr>
@@ -39,16 +35,8 @@
     <td><%= @contact.check_in %></td>
   </tr>
   <tr>
-    <td><b>Check-out</b></td>
-    <td><%= @contact.check_out %></td>
-  </tr>
-  <tr>
     <td><b>Adultos</b></td>
     <td><%= @contact.adults %></td>
-  </tr>
-  <tr>
-    <td><b>Niños</b></td>
-    <td><%= @contact.children %></td>
   </tr>
   <tr>
     <td><b>Comentario</b></td>

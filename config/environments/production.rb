@@ -69,8 +69,8 @@ Comerenmorelos::Application.configure do
       :address		    => 'smtp.gmail.com',
       :port		    => 587,
       :domain		    => 'gmail.com',
-      :user_name	    => 'tuhotelenmorelos@gmail.com',
-      :password		    => 'PWD-h0t3l',
+      :user_name	    => 'comerenmorelos@gmail.com',
+      :password		    => 'PWD-c0m3r',
       :authentication	    => 'plain',
       :enable_starttls_auto => true
   }

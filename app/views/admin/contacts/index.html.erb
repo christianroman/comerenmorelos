@@ -11,10 +11,8 @@
     <tr>
       <th>No.</th>
       <th>Restaurant</th>
-      <th>Habitación</th>
       <th>Cliente</th>
       <th>Check in</th>
-      <th>Check out</th>
       <th></th>
       <th></th>
     </tr>
@@ -24,10 +22,8 @@
       <tr>
         <td><%= link_to contact.id, admin_contact_path(contact) %></td>
         <td><%= link_to contact.restaurant.name, admin_restaurant_path(contact.restaurant) %></td>
-        <td><%= contact.room.nil? ? 'Ninguna' : link_to(contact.room.name, admin_room_path(contact.room_id)) %></td>
         <td><%= contact.guest.nil? ? 'Ninguno' : link_to(contact.guest.name, admin_guest_path(contact.guest)) %></td>
         <td><%= contact.check_in %></td>
-        <td><%= contact.check_out %></td>
         <td><%= link_to 'Editar', edit_admin_contact_path(contact), :class => 'btn btn-small' %></td>
         <td><%= link_to 'Eliminar', [:admin, contact], method: :delete, data: { confirm: '¿Estas seguro?' }, :class => 'btn btn-small btn-danger' %></td>
       </tr>

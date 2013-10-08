@@ -18,7 +18,7 @@
 
               <ul class="nav">
                 <li class="<%= active_class?(admin_restaurants_path) %>">
-                <%= link_to current_admin_user.role?(:super_admin) ? 'Restaurantes' : 'Restaurant', admin_restaurants_path %>
+                <%= link_to current_admin_user.role?(:super_admin) ? 'Restaurantes' : 'Restaurante', admin_restaurants_path %>
                 </li>
                 <% if can? :manage, Destination %>
                   <li class="<%= active_class?(admin_destinations_path) %>"><%= link_to 'Destinos', admin_destinations_path %></li>
@@ -26,13 +26,21 @@
                 <% if can? :manage, Category %>
                   <li class="<%= active_class?(admin_categories_path) %>"><%= link_to 'Categorias', admin_categories_path %></li>
                 <% end %>
+
+                <!--
                 <% unless current_admin_user.role?(:super_admin) %>
                   <li class="<%= active_class?(admin_rooms_path) %>"><%= link_to 'Habitaciones', admin_rooms_path %></li>
                 <% end %>
+                -->
+
                 <li class="<%= active_class?(admin_guests_path) %>"><%= link_to 'Clientes', admin_guests_path %></li>
+
+                <!--
                 <% unless current_admin_user.role?(:super_admin) %>
                   <li class="<%= active_class?(admin_reservations_path) %>"><%= link_to 'Reservaciones', admin_reservations_path %></li>
                 <% end %>
+                -->
+
                 <% unless current_admin_user.role?(:super_admin) %>
                   <li class="<%= active_class?(admin_contacts_path) %>"><%= link_to 'Contactos', admin_contacts_path %></li>
                 <% end %>

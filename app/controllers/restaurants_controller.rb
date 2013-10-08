@@ -37,125 +37,33 @@ class RestaurantsController < ApplicationController
 
     respond_to do |format|
 
-      if @guest.valid?	  
+      if @guest.valid?
         if @guest.save
 
-          check_in_date = params[:check_in].to_time
-          check_out_date = params[:check_out].to_time
-          days = ((check_out_date - check_in_date) / 1.day).to_i
+          @contact = Contact.new(guest_id:@guest.id, check_in: params[:check_in], adults: params[:adults], comment: params[:comentario], restaurant_id: params[:id])
 
-          if params[:commit] == 'Reserva ya'
+          if @contact.valid?
 
-            unless params[:room][:room_id].empty?
+            if @contact.save
 
-              total_amount = days * Room.find(params[:room][:room_id]).fare
-
-              @reservation = Reservation.new(room_id: params[:room][:room_id], guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], restaurant_id: params[:id], status:0, total_amount:total_amount)
-
-              if @reservation.valid?
-                if @reservation.save
-
-                  if Rails.env.production?
-                    ActionMailer::Base.mail(:from => "turestaurantenmorelos@gmail.com", :to => Restaurant.find(params[:id]).email, :subject => "Nueva reservacion", :body => "Se ha realizado una nueva reservacion a traves del portal. Favor de revisar").deliver
-                  end
-
-                  return_url = root_url
-
-                  values = {
-                    :business => @reservation.restaurant.paypal,
-                    :cmd => '_xclick',
-                    :upload => 1,
-                    :currency_code => 'MXN',
-                    :return => return_url,
-                    :invoice => @reservation.id,
-                    :notify_url => payment_notifications_url,
-                    :amount => @reservation.total_amount,
-                    :item_name => "#{days} noches en #{@reservation.restaurant.name}".encode,
-                    :item_number => @reservation.restaurant.id,
-                    :quantity => 1
-                  }
-
-                  format.json{ render :json => { :location => "https://www.sandbox.paypal.com/cgi-bin/webscr?#{values.to_query}" } }
-                  #return
-
-                end
-              else
-
-                @guest.destroy
-
-                @errors = @reservation.errors.full_messages
-                format.json { render :json => @errors }
-
+              if Rails.env.production?
+                ActionMailer::Base.mail(:from => "comerenmorelos@gmail.com", :to => Restaurant.find(params[:id]).email, :subject => "Nueva solicitud de informacion", :body => "Se ha realizado una nueva solicitud de informacion a traves del portal. Favor de revisar").deliver
               end
 
-            else
-              @errors = ["Habitaci&oacute;n no seleccionada"]
-              @guest.destroy
-              format.json { render :json => @errors }
+              format.json { render :json => {:success => true} }
+
             end
 
           else
 
-            unless params[:room].blank?
-
-              unless params[:room][:room_id].empty?
-
-                @contact = Contact.new(room_id: params[:room][:room_id], guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], restaurant_id: params[:id])
-
-                if @contact.valid?
-
-                  if @contact.save
-
-                    if Rails.env.production?
-                      ActionMailer::Base.mail(:from => "comerenmorelos@gmail.com", :to => Restaurant.find(params[:id]).email, :subject => "Nueva solicitud de informacion", :body => "Se ha realizado una nueva solicitud de informacion a traves del portal. Favor de revisar").deliver
-                    end
-
-                    format.json { render :json => {:success => true} }
-
-                  end
-
-                else
-
-                  @guest.destroy
-                  @errors = @contact.errors.full_messages
-                  format.json {render :json => @errors}
-
-                end
-
-              else
-
-                @errors = ['Habitaci&oacute;n no seleccionada']
-                @guest.destroy
-                format.json { render :json => @errors }
-
-              end
-
-            else
-
-              @contact = Contact.new(room_id: nil, guest_id:@guest.id, check_in: params[:check_in], check_out: params[:check_out], adults: params[:adults], children: params[:children], comment: params[:comentario], restaurant_id: params[:id])
-
-              if @contact.valid?
-
-                if @contact.save
-
-                  format.json {render :json => {:success => true}}
-
-                end
-
-              else
-
-                @guest.destroy
-
-                @errors = @contact.errors.full_messages
-                format.json {render :json => @errors}
-
-              end
-
-            end
+            @guest.destroy
+            @errors = @contact.errors.full_messages
+            format.json {render :json => @errors}
 
           end
 
         end
+
       else
 
         @errors = @guest.errors.full_messages
