@@ -30,4 +30,4 @@ production:
   pool: 5
   username: comerenmorelos
   password: PWD-c0m3r
-  socket: /var/tmp/mysql/mysql.sock
+  socket: /var/lib/mysql/mysql.sock
